@@ -55,8 +55,7 @@ Judge whether the hypothesis is correct or not based on the results of the test 
 
 ### More example
 
-In practise, we found TiDB or other softwares can not handle chaos situation with a short intervals, like 3 min IO latency with 3 min no error continue for an hour. It is really hard to keep working when the problem happen.
-(This also happens in Network Chaos)
+In practise, a continues IO latency chaos with some intervals is a nice example.
 
 
 Continues IO Latency intervals:
