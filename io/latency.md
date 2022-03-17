@@ -6,7 +6,7 @@ Test the availability of TiDB cluster in IO Chaos with IO latency scenarios.
 
 ### Hypothesis
 
-When about one third of TiKV pod in TiDB cluster suffered a high IO latency , the TiDB cluster can still provide services normally.
+When about one third of TiKV pod in TiDB cluster suffered a high IO latency, the TiDB cluster can still provide services normally.
 
 ### Preparation
 
@@ -16,10 +16,7 @@ When about one third of TiKV pod in TiDB cluster suffered a high IO latency , th
 
 ### Quick start
 1. Chaos Mesh fault YAML configuration:
-```
-IOChaos-Latency.yaml
-```
-```
+```YAML
 kind: IOChaos
 apiVersion: chaos-mesh.org/v1alpha1
 metadata:
@@ -38,7 +35,6 @@ spec:
   methods:
     - read
     - write
-  percent: 100
   volumePath: /var/lib/tikv
   containerName: tikv
 ```
@@ -49,7 +45,8 @@ kubectl create -f IOChaos-Latency.yaml
 3. Verifying TiDB's status:
 
     Check QPS & TPS of TiDB in Grafana.
-4. Resault:
+    <!-- TODO: Add some grafana picture -->
+4. Result:
 
 Judge whether the hypothesis is correct or not based on the results of the test process.
 
@@ -90,7 +87,6 @@ spec:
         delay: 100ms
         volumePath: /var/lib/tikv
         containerName: tikv
-        percent: 50
         methods:
           - read
           - write
@@ -112,7 +108,6 @@ spec:
         delay: 100ms
         volumePath: /var/lib/tikv
         containerName: tikv
-        percent: 50
         methods:
           - read
           - write
@@ -134,7 +129,6 @@ spec:
         delay: 100ms
         volumePath: /var/lib/tikv
         containerName: tikv
-        percent: 50
         methods:
           - read
           - write
