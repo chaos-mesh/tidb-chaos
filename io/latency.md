@@ -56,7 +56,7 @@ In practise, a continues IO latency chaos with some intervals is a nice example.
 
 
 Continues IO Latency intervals:
-```
+```YAML
 apiVersion: chaos-mesh.org/v1alpha1
 kind: Workflow
 metadata: {}
