@@ -68,10 +68,10 @@ spec:
       children:
         - IO-Latency-1
         - Interval-1
-        - IO-Latency-2
-        - Interval-2
-        - IO-Latency-3
-        - Interval-3
+        - IO-Latency-1
+        - Interval-1
+        - IO-Latency-1
+        - Interval-1
     - name: IO-Latency-1
       templateType: IOChaos
       deadline: 5m
@@ -91,48 +91,6 @@ spec:
           - read
           - write
     - name: Interval-1
-      templateType: Suspend
-      deadline: 5m
-    - name: IO-Latency-2
-      templateType: IOChaos
-      deadline: 5m
-      ioChaos:
-        selector:
-          namespaces:
-            - ${TiDB-Namespace}
-          pods:
-            ${TiDB-Namespace}:
-              - Some-Of-TiKV-PODS
-        mode: all
-        action: latency
-        delay: 100ms
-        volumePath: /var/lib/tikv
-        containerName: tikv
-        methods:
-          - read
-          - write
-    - name: Interval-2
-      templateType: Suspend
-      deadline: 5m
-    - name: IO-Latency-3
-      templateType: IOChaos
-      deadline: 5m
-      ioChaos:
-        selector:
-          namespaces:
-            - ${TiDB-Namespace}
-          pods:
-            ${TiDB-Namespace}:
-              - Some-Of-TiKV-PODS
-        mode: all
-        action: latency
-        delay: 100ms
-        volumePath: /var/lib/tikv
-        containerName: tikv
-        methods:
-          - read
-          - write
-    - name: Interval-3
       templateType: Suspend
       deadline: 5m
 ```
