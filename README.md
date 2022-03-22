@@ -30,8 +30,8 @@ See [fotmat of record](./format.md) for details.
 ### Network
 
 - [Network Delay](./network/delay.md)
-- Network Bandwidth
-- Network Partition
+- [Network Bandwidth](./network/bandwidth.md)
+- [Network Partition](./network/partition.md)
 - Network Packet Loss
 - Network Packet Reorder
 - Network Packet Duplicate
