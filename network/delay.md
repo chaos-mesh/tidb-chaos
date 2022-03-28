@@ -14,7 +14,7 @@ When the network delay between TiDB and TiKV nodes increases by 50ms, the QPS/TP
 
 1. Install chaos-mesh.
 2. A TiDB cluster on k8s with at least 3 TiKV Pods, deploy with [TiDB operator](https://docs.pingcap.com/tidb-in-kubernetes/stable/tidb-operator-overview).
-3. Runing payload on TiDB cluster.
+3. Running payload on TiDB cluster.
 
 ### Quick start
 

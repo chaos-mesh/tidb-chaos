@@ -12,7 +12,7 @@ When about one third of TiKV pod in TiDB cluster suffered a high IO latency, the
 
 1. Install chaos-mesh
 2. A TiDB cluster on k8s with at least 3 tikv POD, deploy with [TiDB operator](https://docs.pingcap.com/tidb-in-kubernetes/stable/tidb-operator-overview).
-3. Runing payload on TiDB cluster
+3. Running payload on TiDB cluster
 
 ### Quick start
 1. Chaos Mesh fault YAML configuration:
