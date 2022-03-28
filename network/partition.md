@@ -60,3 +60,39 @@ kubectl create -f network-partition.yaml
 4. Result:
 
 Judge whether the hypothesis is correct or not based on the results of the test process.
+
+### More example
+
+You can test more scenarios by using Chaos Mesh. For example:
+
+- Network partition occurs between TiDB nodes.
+- Network partition occurs between PD nodes.
+- Network partition occurs between TiDB and TiKV.
+- Network partition occurs between PD and TiKV.
+
+All you need to do is adjust the `selector` and `target` in the YAML configuration. For Network partition occurs between TiDB and TiKV, the YAML configuration looks like below:
+
+```YAML
+kind: NetworkChaos
+apiVersion: chaos-mesh.org/v1alpha1
+metadata:
+  namespace: tidb-cluster
+  name: network-partition
+spec:
+  selector:
+    namespaces:
+      - tidb-cluster
+    labelSelectors:
+      app.kubernetes.io/component: tidb
+  mode: one
+  action: partition
+  duration: 10m
+  direction: both
+  target:
+    selector:
+      namespaces:
+        - tidb-cluster
+      labelSelectors:
+        app.kubernetes.io/component: tikv
+    mode: one
+```

@@ -65,3 +65,42 @@ kubectl create -f network-delay.yaml
 4. Result:
 
 Judge whether the hypothesis is correct or not based on the results of the test process.
+
+### More example
+
+You can test more scenarios by using Chaos Mesh. For example:
+
+- Increasing network delay between TiDB and TiKV.
+- Increasing network delay between TiKV and PD.
+- Increasing network delay between TiKV nodes.
+- Increasing network delay between PD nodes.
+
+All you need to do is adjust the `selector` and `target` in the YAML configuration. For increasing network delay between TiKV nodes, the YAML configuration looks like below:
+
+```YAML
+kind: NetworkChaos
+apiVersion: chaos-mesh.org/v1alpha1
+metadata:
+  namespace: tidb-cluster
+  name: network-delay
+spec:
+  selector:
+    pods:
+      tidb-cluster:
+        - basic-tikv-0
+  mode: all
+  action: delay
+  duration: 10m
+  delay:
+    latency: 50ms
+    correlation: '0'
+    jitter: 0ms
+  direction: both
+  target:
+    selector:
+      pods:
+        tidb-cluster:
+          - basic-tikv-1
+          - basic-tikv-2
+    mode: all
+```

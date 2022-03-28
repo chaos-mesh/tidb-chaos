@@ -65,3 +65,42 @@ kubectl create -f network-bandwidth.yaml
 4. Result:
 
 Judge whether the hypothesis is correct or not based on the results of the test process.
+
+### More example
+
+You can test more scenarios by using Chaos Mesh. For example:
+
+- Limiting the network bandwidth between TiDB and PD.
+- Limiting the network bandwidth between PD and TiKV.
+- Limiting the network bandwidth between TiDB nodes.
+- Limiting the network bandwidth between TiKV nodes.
+
+All you need to do is adjust the `selector` and `target` in the YAML configuration. For limiting the network bandwidth between TiKV nodes, the YAML configuration looks like below:
+
+```YAML
+kind: NetworkChaos
+apiVersion: chaos-mesh.org/v1alpha1
+metadata:
+  namespace: tidb-cluster
+  name: network-bandwidth
+spec:
+  selector:
+    pods:
+      tidb-cluster:
+        - basic-tikv-0
+  mode: all
+  action: bandwidth
+  duration: 10m
+  bandwidth:
+    rate: 1mbps
+    limit: 10000
+    buffer: 10000
+  direction: both
+  target:
+    selector:
+      pods:
+        tidb-cluster:
+          - basic-tikv-1
+          - basic-tikv-2
+    mode: all
+```
