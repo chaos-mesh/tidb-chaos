@@ -1,19 +1,19 @@
 # Test Network Chaos on TiDB
 
-## Network Delay
+## Network Bandwidth
 
 ### Description
 
-Test the availability of TiDB cluster in network delay scenarios.
+Test the availability of TiDB cluster in network bandwidth scenarios.
 
 ### Hypothesis
 
-When the network delay between TiDB and TiKV nodes increases by 50ms, the QPS/TPS of TiDB will drop significantly, but it can still provide services normally.
+When limiting the network bandwidth between TiDB and TiKV to 1mbps, the QPS/TPS of TiDB will drop significantly, but it can still provide services normally.
 
 ### Preparation
 
 1. Install chaos-mesh.
-2. A TiDB cluster on k8s with at least 3 TiKV Pods, deploy with [TiDB operator](https://docs.pingcap.com/tidb-in-kubernetes/stable/tidb-operator-overview).
+2. A TiDB cluster on K8s with at least 3 TiKV Pods, deploy with [TiDB operator](https://docs.pingcap.com/tidb-in-kubernetes/stable/tidb-operator-overview).
 3. Running payload on TiDB cluster.
 
 ### Quick start
@@ -25,7 +25,7 @@ kind: NetworkChaos
 apiVersion: chaos-mesh.org/v1alpha1
 metadata:
   namespace: tidb-cluster
-  name: network-delay
+  name: network-bandwidth
 spec:
   selector:
     namespaces:
@@ -33,12 +33,12 @@ spec:
     labelSelectors:
       app.kubernetes.io/component: tidb
   mode: all
-  action: delay
+  action: bandwidth
   duration: 10m
-  delay:
-    latency: 50ms
-    correlation: '0'
-    jitter: 0ms
+  bandwidth:
+    rate: 1mbps
+    limit: 10000
+    buffer: 10000
   direction: both
   target:
     selector:
@@ -49,12 +49,12 @@ spec:
     mode: all
 ```
 
-Saving the YAML configuration above into file network-delay.yaml.
+Saving the YAML configuration above into file network-bandwidth.yaml.
 
 2. Using Kubectl to create the experiment:
 
 ```
-kubectl create -f network-delay.yaml
+kubectl create -f network-bandwidth.yaml
 ```
 
 3. Verifying TiDB's status:
@@ -70,31 +70,31 @@ Judge whether the hypothesis is correct or not based on the results of the test 
 
 You can test more scenarios by using Chaos Mesh. For example:
 
-- Increasing network delay between TiDB and TiKV.
-- Increasing network delay between TiKV and PD.
-- Increasing network delay between TiKV nodes.
-- Increasing network delay between PD nodes.
+- Limiting the network bandwidth between TiDB and PD.
+- Limiting the network bandwidth between PD and TiKV.
+- Limiting the network bandwidth between TiDB nodes.
+- Limiting the network bandwidth between TiKV nodes.
 
-All you need to do is adjust the `selector` and `target` in the YAML configuration. For increasing network delay between TiKV nodes, the YAML configuration looks like below:
+All you need to do is adjust the `selector` and `target` in the YAML configuration. For limiting the network bandwidth between TiKV nodes, the YAML configuration looks like below:
 
 ```YAML
 kind: NetworkChaos
 apiVersion: chaos-mesh.org/v1alpha1
 metadata:
   namespace: tidb-cluster
-  name: network-delay
+  name: network-bandwidth
 spec:
   selector:
     pods:
       tidb-cluster:
         - basic-tikv-0
   mode: all
-  action: delay
+  action: bandwidth
   duration: 10m
-  delay:
-    latency: 50ms
-    correlation: '0'
-    jitter: 0ms
+  bandwidth:
+    rate: 1mbps
+    limit: 10000
+    buffer: 10000
   direction: both
   target:
     selector:
