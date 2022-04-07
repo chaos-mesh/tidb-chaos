@@ -34,7 +34,7 @@ See [fotmat of record](./format.md) for details.
 - [Network Partition](./network/partition.md)
 - [Network Packet Loss](./network/loss.md)
 - [Network Packet Reorder](./network/reorder.md)
-- Network Packet Duplicate
+- [Network Packet Duplicate](./network/duplicate.md)
 - Network Packet Corrupt
 
 ### IO
