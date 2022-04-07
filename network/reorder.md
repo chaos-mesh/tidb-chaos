@@ -4,7 +4,7 @@
 
 ### Description
 
-Test the availability of TiDB cluster in network package reorder scenarios.
+Test the availability of the TiDB cluster in network package reorder scenarios.
 
 ### Hypothesis
 
@@ -79,7 +79,7 @@ You can test more scenarios by using Chaos Mesh. For example:
 - Network package reorder occurs between TiKV nodes.
 - Network package reorder occurs between PD nodes.
 
-All you need to do is adjust the `selector` and `target` in the YAML configuration. For inject network package reorder between TiKV nodes, the YAML configuration looks like below:
+All you need to do is adjust the `selector` and `target` in the YAML configuration. For inject network package reorder between TiKV nodes, the YAML configuration looks like the below:
 
 ```YAML
 kind: NetworkChaos

@@ -4,7 +4,7 @@
 
 ### Description
 
-Test the availability of TiDB cluster in network bandwidth scenarios.
+Test the availability of the TiDB cluster in network bandwidth scenarios.
 
 ### Hypothesis
 
@@ -75,7 +75,7 @@ You can test more scenarios by using Chaos Mesh. For example:
 - Limiting the network bandwidth between TiDB nodes.
 - Limiting the network bandwidth between TiKV nodes.
 
-All you need to do is adjust the `selector` and `target` in the YAML configuration. For limiting the network bandwidth between TiKV nodes, the YAML configuration looks like below:
+All you need to do is adjust the `selector` and `target` in the YAML configuration. For limiting the network bandwidth between TiKV nodes, the YAML configuration looks like the below:
 
 ```YAML
 kind: NetworkChaos

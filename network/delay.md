@@ -4,7 +4,7 @@
 
 ### Description
 
-Test the availability of TiDB cluster in network delay scenarios.
+Test the availability of the TiDB cluster in network delay scenarios.
 
 ### Hypothesis
 
@@ -75,7 +75,7 @@ You can test more scenarios by using Chaos Mesh. For example:
 - Increasing network delay between TiKV nodes.
 - Increasing network delay between PD nodes.
 
-All you need to do is adjust the `selector` and `target` in the YAML configuration. For increasing network delay between TiKV nodes, the YAML configuration looks like below:
+All you need to do is adjust the `selector` and `target` in the YAML configuration. For increasing network delay between TiKV nodes, the YAML configuration looks like the below:
 
 ```YAML
 kind: NetworkChaos

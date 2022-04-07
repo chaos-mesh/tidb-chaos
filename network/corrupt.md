@@ -1,14 +1,14 @@
 # Test Network Chaos on TiDB
 
-## Network Duplicate
+## Network Corrupt
 
 ### Description
 
-Test the availability of the TiDB cluster in network package duplicate scenarios.
+Test the availability of the TiDB cluster in network package corrupt scenarios.
 
 ### Hypothesis
 
-When the network package duplicate occurs between TiDB and TiKV nodes, the QPS/TPS of TiDB will drop significantly, but it can still provide services normally.
+When the network package corruption occurs between TiDB and TiKV nodes, the QPS/TPS of TiDB will drop significantly, but it can still provide services normally.
 
 ### Preparation
 
@@ -25,7 +25,7 @@ kind: NetworkChaos
 apiVersion: chaos-mesh.org/v1alpha1
 metadata:
   namespace: tidb-cluster
-  name: network-duplicate
+  name: network-corrupt
 spec:
   selector:
     namespaces:
@@ -33,9 +33,9 @@ spec:
     labelSelectors:
       app.kubernetes.io/component: tidb
   mode: all
-  action: duplicate
-  duplicate:
-    duplicate: '50'
+  action: corrupt
+  corrupt:
+    corrupt: '50'
     correlation: '50'
   direction: both
   target:
@@ -47,12 +47,12 @@ spec:
     mode: all
 ```
 
-Saving the YAML configuration above into file network-duplicate.yaml.
+Saving the YAML configuration above into file network-corrupt.yaml.
 
 2. Using Kubectl to create the experiment:
 
 ```
-kubectl create -f network-duplicate.yaml
+kubectl create -f network-corrupt.yaml
 ```
 
 3. Verifying TiDB's status:
@@ -68,28 +68,28 @@ Judge whether the hypothesis is correct or not based on the results of the test 
 
 You can test more scenarios by using Chaos Mesh. For example:
 
-- Network package duplicate occurs between TiDB and TiKV.
-- Network package duplicate occurs between TiKV and PD.
-- Network package duplicate occurs between TiKV nodes.
-- Network package duplicate occurs between PD nodes.
+- Network package corruption occurs between TiDB and TiKV.
+- Network package corruption occurs between TiKV and PD.
+- Network package corruption occurs between TiKV nodes.
+- Network package corruption occurs between PD nodes.
 
-All you need to do is adjust the `selector` and `target` in the YAML configuration. To inject network package duplicate between TiKV nodes, the YAML configuration looks like the below:
+All you need to do is adjust the `selector` and `target` in the YAML configuration. To inject network package corrupt between TiKV nodes, the YAML configuration looks like the below:
 
 ```YAML
 kind: NetworkChaos
 apiVersion: chaos-mesh.org/v1alpha1
 metadata:
   namespace: tidb-cluster
-  name: network-duplicate
+  name: network-corrupt
 spec:
   selector:
     pods:
       tidb-cluster:
         - basic-tikv-0
   mode: all
-  action: duplicate
-  duplicate:
-    duplicate: '50'
+  action: corrupt
+  corrupt:
+    corrupt: '50'
     correlation: '50'
   direction: both
   target:
