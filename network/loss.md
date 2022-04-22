@@ -4,7 +4,7 @@
 
 ### Description
 
-Test the availability of TiDB cluster in network package loss scenarios.
+Test the availability of the TiDB cluster in network package loss scenarios.
 
 ### Hypothesis
 
