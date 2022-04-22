@@ -32,10 +32,10 @@ See [fotmat of record](./format.md) for details.
 - [Network Delay](./network/delay.md)
 - [Network Bandwidth](./network/bandwidth.md)
 - [Network Partition](./network/partition.md)
-- Network Packet Loss
-- Network Packet Reorder
-- Network Packet Duplicate
-- Network Packet Corrupt
+- [Network Packet Loss](./network/loss.md)
+- [Network Packet Reorder](./network/reorder.md)
+- [Network Packet Duplicate](./network/duplicate.md)
+- [Network Packet Corrupt](./network/corrupt.md)
 
 ### IO
 

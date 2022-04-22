@@ -4,11 +4,11 @@
 
 ### Description
 
-Test the availability of TiDB cluster in network partition scenarios.
+Test the availability of the TiDB cluster in network partition scenarios.
 
 ### Hypothesis
 
-When a network partition occurs between a TiKV node and other TiKV nodes in the cluster, the QPS/TPS drop significantly, and then recover to normal levels, and the data is consistent.
+When a network partition occurs between a TiKV node and other TiKV nodes in the cluster, the QPS/TPS drop significantly and then recover to normal levels, and the data is consistent.
 
 ### Preparation
 
@@ -70,7 +70,7 @@ You can test more scenarios by using Chaos Mesh. For example:
 - Network partition occurs between TiDB and TiKV.
 - Network partition occurs between PD and TiKV.
 
-All you need to do is adjust the `selector` and `target` in the YAML configuration. For Network partition occurs between TiDB and TiKV, the YAML configuration looks like below:
+All you need to do is adjust the `selector` and `target` in the YAML configuration. For network partition that occurs between TiDB and TiKV, the YAML configuration looks like the below:
 
 ```YAML
 kind: NetworkChaos
